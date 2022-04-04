@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Exchange extends React.Component {
+class exchange extends React.Component {
   render() {
     return (
       <div>This is Exchange</div>
@@ -8,4 +8,4 @@ class Exchange extends React.Component {
   }
 }
 
-export default Exchange;
+export default exchange;

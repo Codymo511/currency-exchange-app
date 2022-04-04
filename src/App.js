@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from './Home';
-import Exchange from './Exchange';
+import exchange from './Exchange';
 import './App.css';
+
 
 
 const NotFound = ()=>{
@@ -15,10 +16,12 @@ function App() {
     <Router>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">Currency Exchange</Link>
+      
       </nav>
+      <h4><Link to="/Exchange/">Exchange</Link></h4>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Exchange" component={Exchange} />
+        <Route path="/Exchange" component={exchange} />
+        <Route exact path="/" component={Home} />
         <Route component={NotFound} />
         </Switch>
     </Router>
