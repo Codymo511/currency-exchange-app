@@ -1,8 +1,10 @@
 import React from 'react';
+import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import navbar from "./components/navbar"
 import Home from './Home';
 import exchange from './Exchange';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -14,16 +16,14 @@ const NotFound = ()=>{
 function App() {
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">Currency Exchange</Link>
-      
-      </nav>
+      <Route component ={navbar}/>
       <h4><Link to="/Exchange/">Exchange</Link></h4>
+      <h4><Link to="/">Home</Link></h4>
       <Switch>
-        <Route path="/Exchange" component={exchange} />
+        <Route path ="/Exchange" component={exchange} />
         <Route exact path="/" component={Home} />
         <Route component={NotFound} />
-        </Switch>
+      </Switch>
     </Router>
   );
 }
