@@ -17,8 +17,10 @@ function App() {
   return (
     <Router>
       <Route component ={navbar}/>
+      <div >
       <h4><Link to="/Exchange/">Exchange</Link></h4>
-      <h4><Link to="/">Home</Link></h4>
+      <h4><Link to="/">Convert currency</Link></h4>
+      </div>
       <Switch>
         <Route path ="/Exchange" component={exchange} />
         <Route exact path="/" component={Home} />
