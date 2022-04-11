@@ -1,5 +1,6 @@
 import React from 'react';
 import { DropdownButton, Dropdown} from 'react-bootstrap';
+import currencies from './utils/currencies';
 
 class exchange extends React.Component {
   constructor(props){
