@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import navbar from "./components/navbar"
-import Home from './Home';
+import currencyconverter from './CurrencyConverter';
 import exchange from './Exchange';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -23,7 +23,7 @@ function App() {
       </div>
       <Switch>
         <Route path ="/Exchange" component={exchange} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={currencyconverter} />
         <Route component={NotFound} />
       </Switch>
     </Router>
