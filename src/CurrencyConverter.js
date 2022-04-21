@@ -22,7 +22,7 @@ class CurrencyConverter extends React.Component  {
     this.setState({ currencyAmount: event.target.value });
   }
 
-  changeCurrency = (event)=>{
+  changeSecondCurrency = (event)=>{
     this.setState({ secondCurrency: event.target.value });
   }
 
@@ -45,7 +45,7 @@ class CurrencyConverter extends React.Component  {
                   {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                 </select>
                             
-                <select value={base} onChange={this.changeCurrency} className="form-control form-control-lg " >
+                <select value={base} onChange={this.changeSecondCurrency} className="form-control form-control-lg " >
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
               </form>
