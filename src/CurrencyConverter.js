@@ -44,7 +44,9 @@ class CurrencyConverter extends React.Component  {
                 <select value={base} onChange={this.changeBase} className="form-control form-control-lg " >
                   {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                 </select>
-                            
+                <div class="text-center">
+                    <img className='arrow' src={require('./images/arrow.svg').default} alt='arrow' />
+                    </div>
                 <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg " >
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
