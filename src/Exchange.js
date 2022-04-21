@@ -29,7 +29,6 @@ class ExChange extends React.Component {
       .then(Status)
       .then(json)
       .then(data => {
-        console.log(data)
         if (data.error) {
           throw new Error(data.error);
         }

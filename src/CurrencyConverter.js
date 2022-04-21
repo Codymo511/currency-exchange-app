@@ -11,6 +11,7 @@ class CurrencyConverter extends React.Component  {
       rates: '',
       loading: true,
       currencyAmount:'',
+      secondCurrency:'AUD'
     }
   }
   changeBase = (event) => {
@@ -20,8 +21,14 @@ class CurrencyConverter extends React.Component  {
   changeCurrencyAmount = (event)=>{
     this.setState({ currencyAmount: event.target.value });
   }
+
+  changeCurrency = (event)=>{
+    this.setState({ secondCurrency: event.target.value });
+  }
+
   render() {
-    const { base} = this.state;
+    const { base,secondCurrency} = this.state;
+    console.log(base,secondCurrency)
     return (
       <>
       <div className="container">
@@ -37,6 +44,10 @@ class CurrencyConverter extends React.Component  {
                 <select value={base} onChange={this.changeBase} className="form-control form-control-lg " >
                   {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                 </select>
+                            
+                <select value={base} onChange={this.changeCurrency} className="form-control form-control-lg " >
+                {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
+              </select>
               </form>
           </div>
         </div>
