@@ -17,21 +17,29 @@ class CurrencyConverter extends React.Component  {
       secondValue:0,
     }
   }
+
+  componentDidMount(){
+    const { base, secondCurrency,amount} = this.state;
+    this.getRatesData(base, secondCurrency,amount)
+  }
   changeBase = (event) => {
-    this.setState({ base: event.target.value });
-    this.getRatesData(event.target.value);
+    const base = event.Target.value;
+    this.setState({ base});
+    this.getRatesData(base,this.state.secondCurrency );
   }
   
   changeCurrencyAmount = (event)=>{
-    this.setState({ amount: event.target.value });
-    this.getRatesData(event.target.value);
+    const amount = event.target.value
+    this.setState({amount});
+    this.getRatesData(amount,this.state.secondCurrency,this.state.base);
   }
-
+np
   changeSecondCurrency = (event)=>{
-    this.setState({ secondCurrency: event.target.value });
-    this.getRatesData(event.target.value);
+    const secondCurrency = event.target.value;
+    this.setState({ secondCurrency});
+    this.getRatesData(this.state.base,secondCurrency);
   }
-// need to resolve issue here, cannot add second currecny for the api fetch
+// API is now working, the issue is it was only call convert was is initially put in, if you try to change the amount its fine, if you try to change the currecny it will throw an error
   getRatesData = (amount,base,secondCurrency) => {
     this.setState({ loading: true });
     fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${amount}from=${base}&to=${secondCurrency}`)
@@ -42,21 +50,12 @@ class CurrencyConverter extends React.Component  {
         if (data.error) {
           throw new Error(data.error);
         }
-
-        const rates = Object.keys(data.rates)
-          .filter(acronym => acronym !== base||secondCurrency)
-          .map(acronym => ({
-            acronym,
-            rate: data.rates[acronym],
-            name: currencies[acronym].name,
-            symbol: currencies[acronym].symbol,
-          }))
-
-        this.setState({ rates, loading: false });
+        
+        this.setState({ base,secondCurrency,amount, loading: false });
       })
       .catch(error => console.error(error.message));
   }
-  render(getRatesData) {
+  render() {
     const { base,secondCurrency} = this.state;
     return (
       <>
