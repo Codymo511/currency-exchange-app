@@ -9,10 +9,10 @@ class CurrencyConverter extends React.Component  {
     super(props);
     this.state = {
       base: 'USD',
-      baseValue:0,
+      baseValue:1,
       loading: true,
       secondCurrency:'AUD',
-      secondValue:0,
+      rate:0,
     }
   }
 
@@ -20,10 +20,10 @@ class CurrencyConverter extends React.Component  {
     const { base,baseValue,secondCurrency,} = this.state;
     this.getRatesData(base,baseValue, secondCurrency)
   }
-  changeBase = (event) => {
+  changeBase = (event) => { 
     const base = event.target.value;
     this.setState({ base});
-    this.getRatesData(this.baseValue,base,this.state.secondCurrency );
+    this.getRatesData(this.baseValue,base,this.state.secondCurrency);
   }
   
   changeCurrencyAmount = (event)=>{
@@ -31,14 +31,14 @@ class CurrencyConverter extends React.Component  {
     this.setState({baseValue});
     this.getRatesData(baseValue,this.state.base,this.state.secondCurrency);
   }
-np
+
   changeSecondCurrency = (event)=>{
     const secondCurrency = event.target.value;
     this.setState({ secondCurrency});
     this.getRatesData(this.state.baseValue,this.state.base,secondCurrency);
   }
 
-  getRatesData = (baseValue,base,secondCurrency,secondValue) => {
+  getRatesData = (baseValue,base,secondCurrency) => {
     this.setState({ loading: true });
     fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${baseValue}from=${base}&to=${secondCurrency}`)
       .then(Status)
@@ -48,18 +48,18 @@ np
         if (data.error) {
           throw new Error(data.error);
         }
-        
-        this.setState({secondValue});
+        const rate = data.rates[secondCurrency];
+        this.setState({
+          rate,
+          baseValue: 1,
+          secondCurrency,
+          loading: false,
+        });
       })
       .catch(error => console.error(error.message));
   }
   render() {
-    // everything is plugged in correctly and updates, now you just need to get it to pass this to the api for everyupdate.
-    const { base, baseValue,secondCurrency,secondValue} = this.state;
-    console.log('heres base='+base)
-    console.log('heres base value='+baseValue)
-    console.log('secondCurrency='+secondCurrency)
-    console.log('secondValue='+secondValue)
+    const { base, baseValue,secondCurrency,rate} = this.state;
     return (
       <>
       <div className="container">
@@ -82,7 +82,7 @@ np
                 <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg " >
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
-              <div><h4>{secondValue}</h4></div>
+              <div><h4>{rate}</h4></div>
               </form>
           </div>
         </div>
