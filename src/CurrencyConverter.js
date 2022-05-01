@@ -3,27 +3,28 @@ import currencies from './utils/currencies';
 import {Status, json } from './utils/fetchUtils';
 
 
-// next it needs to display the amount of the converted currency (ie 1k aud to usd is 736)
+// now fix so you can change second value and convert
 class CurrencyConverter extends React.Component  {
   constructor(props) {
     super(props);
+    
     this.state = {
-      base: 'USD',
-      baseValue:1,
+      base:'AUD',
+      baseValue:'1',
       loading: true,
-      secondCurrency:'AUD',
-      rate:0,
+      secondCurrency:'JPY',
+      secondValue:'',
     }
   }
 
   componentDidMount(){
-    const { base,baseValue,secondCurrency,} = this.state;
-    this.getRatesData(base,baseValue, secondCurrency)
+    const { baseValue,base,secondCurrency} = this.state;
+    this.getRatesData( baseValue,base,secondCurrency)
   }
-  changeBase = (event) => { 
+  changebase = (event) => { 
     const base = event.target.value;
     this.setState({ base});
-    this.getRatesData(this.baseValue,base,this.state.secondCurrency);
+    this.getRatesData(this.state.baseValue,base,this.state.secondCurrency);
   }
   
   changeCurrencyAmount = (event)=>{
@@ -33,25 +34,37 @@ class CurrencyConverter extends React.Component  {
   }
 
   changeSecondCurrency = (event)=>{
-    const secondCurrency = event.target.value;
+    
+    const secondCurrency = event.target.value
     this.setState({ secondCurrency});
+    console.log(this.state.base)
     this.getRatesData(this.state.baseValue,this.state.base,secondCurrency);
   }
+  changeSecondValue = (event)=>{
+    const SecondValue = event.target.value
+    this.setState({SecondValue});
+    this.getRatesData(SecondValue,this.state.base,this.state.secondCurrency);
+  }
+
 
   getRatesData = (baseValue,base,secondCurrency) => {
     this.setState({ loading: true });
-    fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${baseValue}from=${base}&to=${secondCurrency}`)
+    console.log(baseValue,base,secondCurrency)
+    fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${baseValue}&from=${base}&to=${secondCurrency}`)
       .then(Status)
       .then(json)
       .then(data => {
-        console.log(data)
+       
         if (data.error) {
           throw new Error(data.error);
         }
+        console.log(data)
         const rate = data.rates[secondCurrency];
+        
         this.setState({
           rate,
-          baseValue: 1,
+          base,
+          baseValue,
           secondCurrency,
           loading: false,
         });
@@ -59,7 +72,7 @@ class CurrencyConverter extends React.Component  {
       .catch(error => console.error(error.message));
   }
   render() {
-    const { base, baseValue,secondCurrency,rate} = this.state;
+    const { baseCurrency,baseValue,secondCurrency,rate} = this.state;
     return (
       <>
       <div className="container">
@@ -68,12 +81,12 @@ class CurrencyConverter extends React.Component  {
               <form className="justify-content-center">
               <input
               className='form-input'
-              type='text'
+              type='number'
               placeholder='Enter currency amount'
               value={baseValue}
               onChange={this.changeCurrencyAmount}            
               />
-                <select value={base} onChange={this.changeBase} className="form-control form-control-lg " >
+                <select value={baseCurrency} onChange={this.changebase} className="form-control form-control-lg " >
                   {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                 </select>
                 <div class="text-center">
@@ -82,7 +95,7 @@ class CurrencyConverter extends React.Component  {
                 <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg " >
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
-              <div><h4>{rate}</h4></div>
+              <div><h4><input value={rate} onChange={this.changeSecondValue} /></h4></div>
               </form>
           </div>
         </div>
