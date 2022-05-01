@@ -58,14 +58,15 @@ class CurrencyConverter extends React.Component  {
         if (data.error) {
           throw new Error(data.error);
         }
-        console.log(data)
         const rate = data.rates[secondCurrency];
+        const secondValue = data.rates
         
         this.setState({
           rate,
           base,
           baseValue,
           secondCurrency,
+          secondValue,
           loading: false,
         });
       })
