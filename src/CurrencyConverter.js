@@ -3,7 +3,6 @@ import currencies from './utils/currencies';
 import {Status, json } from './utils/fetchUtils';
 
 
-
 class CurrencyConverter extends React.Component  {
   constructor(props) {
     super(props);
@@ -17,11 +16,11 @@ class CurrencyConverter extends React.Component  {
     }
   }
 
-
   componentDidMount(){
     const { baseValue,base,secondCurrency} = this.state;
     this.getRatesData( baseValue,base,secondCurrency)
   }
+
   changebase = (event) => { 
     const base = event.target.value;
     this.setState({ base});
@@ -47,15 +46,13 @@ class CurrencyConverter extends React.Component  {
    const baseValue=event.target.value
    this.setState({
     baseValue,
-
     });
    console.log("change second value" + baseValue,this.state.secondCurrency,this.state.base)
-   this.reverseRatesData(baseValue,this.state.secondCurrency,this.state.base); //call api with reversed currencies 
+   this.reverseRatesData(baseValue,this.state.base,this.state.secondCurrency,); //call api with reversed currencies 
   }
 
   reverseRatesData = (baseValue,secondCurrency,base) => {       //api is called with new base value 
     this.setState({ loading: true });
-    
     fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${baseValue}&from=${secondCurrency}&to=${base}`) //reversed secondCurrency and base
       .then(Status)
       .then(json)
@@ -64,20 +61,17 @@ class CurrencyConverter extends React.Component  {
         if (data.error) {
           throw new Error(data.error);
         }
-        const secondValue = data.rates
+        const secondValue = data.rates[secondCurrency]
         console.log(data.rates)
-        
-        
+
         this.setState({
-          //rate,
           base,
           baseValue,
-          //baseCurrency,
           secondCurrency,
           secondValue,
           loading: false,
         });
-        console.log("base currcnery:"+ "base value"+ baseValue,"secondCurrency" + secondCurrency,base +"base" ,)
+        console.log("base value"+ baseValue,"secondCurrency" + secondCurrency,"base" + base, "secondValue" + secondValue)
       })
       .catch(error => console.error(error.message));
   }
@@ -85,7 +79,6 @@ class CurrencyConverter extends React.Component  {
 
   getRatesData = (baseValue,base,secondCurrency) => {
     this.setState({ loading: true });
-    
     fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${baseValue}&from=${base}&to=${secondCurrency}`)
       .then(Status)
       .then(json)
