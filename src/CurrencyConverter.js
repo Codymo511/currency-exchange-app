@@ -44,9 +44,9 @@ class CurrencyConverter extends React.Component  {
   //Fix issue secondCurrency issue, as of now it is imutable. the api will call correctly but the updated state is not being shown in the input boxes 
   changeSecondValue = (event) =>{ //change to new base value
    const baseValue=event.target.value
-   this.setState({
-    baseValue,
-    });
+   // this.setState({
+   //  baseValue,
+   //  });
    console.log("change second value" + baseValue,this.state.secondCurrency,this.state.base)
    this.reverseRatesData(baseValue,this.state.base,this.state.secondCurrency,); //call api with reversed currencies 
   }
@@ -66,9 +66,7 @@ class CurrencyConverter extends React.Component  {
 
         this.setState({
           base,
-          baseValue,
           secondCurrency,
-          secondValue,
           loading: false,
         });
         console.log("base value"+ baseValue,"secondCurrency" + secondCurrency,"base" + base, "secondValue" + secondValue)
@@ -92,7 +90,6 @@ class CurrencyConverter extends React.Component  {
         this.setState({
           rate,
           base,
-          baseValue,
           secondCurrency,
           secondValue,
           loading: false,
