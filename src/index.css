@@ -1,5 +1,6 @@
 body {
   margin: 0;
+ 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -14,4 +15,11 @@ code {
 
 .arrow{
   height: 30px;
+}
+.main-container{
+  background-color: #5DDF99;
+}
+.container{
+  background-color: #5DDF99;
+  width: 100%;
 }

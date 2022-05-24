@@ -2,6 +2,7 @@ import React from 'react';
 import currencies from './utils/currencies';
 import {Status, json } from './utils/fetchUtils';
 import ExchangeTable from './components/ExchangeTable';
+import './styles/main.css';
 
 
 class ExChange extends React.Component {
@@ -49,10 +50,10 @@ class ExChange extends React.Component {
 
   render () {
     const { base, rates, loading } = this.state;
-
+  
     return (
       <>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-sm-12">
                 <form className="justify-content-center">
