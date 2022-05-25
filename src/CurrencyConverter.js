@@ -103,11 +103,11 @@ class CurrencyConverter extends React.Component  {
     return (
       <>
       <div className="container-fluid">
-        <div className="row ">
-          <div className="col-sm-12 ">
-              <form className="justify-content-center">
+        <div className="row">
+        <div class="col-sm-6 pt-4 mx-auto text-center">
+              <form>
               <input
-              className='form-input'
+              class="form-input"
               type='number'
               placeholder='Enter currency amount'
               value={baseValue}
@@ -123,10 +123,11 @@ class CurrencyConverter extends React.Component  {
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
               <div><h4><input value={rate} onChange={this.changeSecondValue} /></h4></div>
+             
               </form>
+              </div>
           </div>
         </div>
-      </div>
     </>
     )
   }
