@@ -5,7 +5,9 @@ import currencyconverter from './CurrencyConverter';
 import exchange from './Exchange';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Podkova&display=swap');
+</style>
 
 const NotFound = ()=>{
   return <h2>404 Not Found</h2>
@@ -17,8 +19,8 @@ function App() {
     <Router>
       <Route component ={navbar}/>
         <div className=' main-container d-flex justify-content-around'>
-          <h4 className="ml-4"><Link to="/Exchange/">Exchange</Link></h4>
-          <h4><Link to="/">Convert currency</Link></h4>
+          <h4 className="exchange-link ml-4"><Link to="/Exchange/">Exchange</Link></h4>
+          <h4 className="convert-link"><Link to="/">Convert currency</Link></h4>
         </div>
     
       <Switch>

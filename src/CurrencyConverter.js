@@ -107,22 +107,22 @@ class CurrencyConverter extends React.Component  {
         <div class="col-sm-6 pt-4 mx-auto text-center">
               <form>
               <input
-              class="form-input"
+              class="form-control form-control-lg text-center"
               type='number'
               placeholder='Enter currency amount'
               value={baseValue}
               onChange={this.changeCurrencyAmount}            
               />
-                <select value={baseCurrency} onChange={this.changebase} className="form-control form-control-lg " >
+                <select value={baseCurrency} onChange={this.changebase} className="form-control form-control-lg text-center " >
                   {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                 </select>
                 <div class="text-center">
                     <img className='arrow' src={require('./images/arrow.svg').default} alt='convert-arrow' />
                     </div>
-                <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg " >
+                <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg text-center " >
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
-              <div><h4><input value={rate} onChange={this.changeSecondValue} /></h4></div>
+              <div><h4><input value={rate} onChange={this.changeSecondValue} class="form-control form-control-lg text-center"/></h4></div>
              
               </form>
               </div>
