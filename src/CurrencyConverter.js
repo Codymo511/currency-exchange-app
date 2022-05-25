@@ -102,9 +102,9 @@ class CurrencyConverter extends React.Component  {
     const { baseCurrency,baseValue,secondCurrency,rate} = this.state;
     return (
       <>
-      <div className=" container-fluid">
-        <div className="row">
-          <div className="col-sm-12">
+      <div className="container-fluid">
+        <div className="row ">
+          <div className="col-sm-12 ">
               <form className="justify-content-center">
               <input
               className='form-input'
