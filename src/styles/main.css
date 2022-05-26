@@ -8,3 +8,18 @@ a{
 .container-fluid{
     background-color: #5DDF99;
 }
+.form-control {
+    border-color: #4332AC !important;
+    background-color: #5DDF99 !important;;
+}
+
+.currency-table{
+    background-color: #5DDF99;
+}
+td{
+    color:#4332AC;
+  
+}
+tr{
+    color: #4332AC;
+}

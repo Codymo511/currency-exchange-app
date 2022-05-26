@@ -11,7 +11,7 @@ class navbar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto text-white">
-            <Nav.Link className="pl-5 text-white"href="#home">Portfolio</Nav.Link>
+            <Nav.Link className="pl-5 text-white"href="https://pedantic-mahavira-86c479.netlify.app/">Portfolio</Nav.Link>
             <Nav.Link className="text-white"href="#link">Github</Nav.Link>
           </Nav>
         </Navbar.Collapse>

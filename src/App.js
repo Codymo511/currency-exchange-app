@@ -18,13 +18,13 @@ function App() {
   return (
     <Router>
       <Route component ={navbar}/>
-        <div className=' main-container d-flex justify-content-around'>
+        <div className=' main-container d-flex justify-content-around pt-4 pb-3'>
           <h4 className="exchange-link ml-4"><Link to="/Exchange/">Exchange</Link></h4>
           <h4 className="convert-link"><Link to="/">Convert currency</Link></h4>
         </div>
     
       <Switch>
-        <Route path ="/Exchange" component={exchange} activeStyle={{border:"3px solid #4332AC"}}/>
+        <Route path ="/Exchange" component={exchange}/>
         <Route exact path="/" component={currencyconverter} />
         <Route component={NotFound} />
       </Switch>

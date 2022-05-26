@@ -57,7 +57,7 @@ class ExChange extends React.Component {
           <div className="row">
             <div className="col-sm-12">
                 <form className="justify-content-center">
-                  <h3 className="mb-4"><b className="ml-1">1</b></h3>
+                  <h3 className="mb-4 text-center"><b className="ml-1">1</b></h3>
                   <select value={base} onChange={this.changeBase} className="form-control form-control-lg " disabled={loading}>
                     {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                   </select>

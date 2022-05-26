@@ -102,7 +102,7 @@ class CurrencyConverter extends React.Component  {
     const { baseCurrency,baseValue,secondCurrency,rate} = this.state;
     return (
       <>
-      <div className="container-fluid">
+      <div className="container-fluid vh-100 ">
         <div className="row">
         <div class="col-sm-6 pt-4 mx-auto text-center">
               <form>
@@ -116,7 +116,7 @@ class CurrencyConverter extends React.Component  {
                 <select value={baseCurrency} onChange={this.changebase} className="form-control form-control-lg text-center " >
                   {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
                 </select>
-                <div class="text-center">
+                <div class="text-center p-4">
                     <img className='arrow' src={require('./images/arrow.svg').default} alt='convert-arrow' />
                     </div>
                 <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg text-center " >

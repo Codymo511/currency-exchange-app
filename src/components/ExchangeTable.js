@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/main.css';
 
 const ExchangeTable = (props) => {
   console.log(props)
@@ -7,11 +8,11 @@ const ExchangeTable = (props) => {
     return null;
   }
   return (
-    <table className="table table-sm bg-light mt-4">
+    <table className="table table-sm  mt-4">
       <thead>
         <tr>
           <th scope="col"></th>
-          <th scope="col" className="text-right pr-4 py-2">1.00 {base}</th>
+          <th scope="col" className="text-right pr-4 py-2">1.00{base}</th>
         </tr>
       </thead>
       <tbody>
