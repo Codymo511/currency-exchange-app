@@ -42,17 +42,14 @@ class CurrencyConverter extends React.Component  {
   }
 
 
-  //Fix issue secondCurrency issue, as of now it is imutable. the api will call correctly but the updated state is not being shown in the input boxes 
+  
   changeSecondValue = (event) =>{ //change to new base value
    const baseValue=event.target.value
-   // this.setState({
-   //  baseValue,
-   //  });
-   console.log("change second value" + baseValue,this.state.secondCurrency,this.state.base)
+  
    this.reverseRatesData(baseValue,this.state.base,this.state.secondCurrency,); //call api with reversed currencies 
   }
 
-  reverseRatesData = (baseValue,secondCurrency,base) => {       //api is called with new base value 
+  reverseRatesData = (baseValue,secondCurrency,base) => {    
     this.setState({ loading: true });
     fetch(`https://altexchangerateapi.herokuapp.com/latest?amount=${baseValue}&from=${secondCurrency}&to=${base}`) //reversed secondCurrency and base
       .then(Status)
