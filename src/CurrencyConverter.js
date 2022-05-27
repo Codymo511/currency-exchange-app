@@ -1,13 +1,14 @@
 import React from 'react';
+import Chart from 'chart.js/auto';
 import currencies from './utils/currencies';
 import {Status, json } from './utils/fetchUtils';
 import './styles/main.css';
+import { withRouter } from 'react-router-dom';
 
 
 class CurrencyConverter extends React.Component  {
   constructor(props) {
     super(props);
-    
     this.state = {
       base:'AUD',
       baseValue:'0',
@@ -15,17 +16,20 @@ class CurrencyConverter extends React.Component  {
       secondCurrency:'JPY',
       secondValue:'',
     }
+    this.chartRef = React.createRef();
   }
 
   componentDidMount(){
     const { baseValue,base,secondCurrency} = this.state;
     this.getRatesData( baseValue,base,secondCurrency)
+    this.getHistoricalRates(base, secondCurrency);
   }
 
   changebase = (event) => { 
     const base = event.target.value;
     this.setState({ base});
     this.getRatesData(this.state.baseValue,base,this.state.secondCurrency);
+    this.getHistoricalRates(base, this.state.secondCurrency);
   }
   
   changeCurrencyAmount = (event)=>{
@@ -39,6 +43,7 @@ class CurrencyConverter extends React.Component  {
     this.setState({ secondCurrency});
     console.log(this.state.base)
     this.getRatesData(this.state.baseValue,this.state.base,secondCurrency);
+    this.getHistoricalRates(this.state.base, secondCurrency);
   }
 
 
@@ -95,6 +100,48 @@ class CurrencyConverter extends React.Component  {
       })
       .catch(error => console.error(error.message));
   }
+
+  getHistoricalRates = (base, secondCurrency) => {
+    const endDate = new Date().toISOString().split('T')[0];
+    const startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+    fetch(`https://altexchangerateapi.herokuapp.com/${startDate}..${endDate}?from=${base}&to=${secondCurrency}`)
+    
+      .then(Status)
+      .then(json)
+      .then(data => {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        const chartLabels = Object.keys(data.rates);
+        const chartData = Object.values(data.rates).map(rate => rate[secondCurrency]);
+        const chartLabel = `${base}/${secondCurrency}`;
+        this.buildChart(chartLabels, chartData, chartLabel);
+      })
+      .catch(error => console.error(error.message));
+  }
+  buildChart = (labels, data, label) => {
+    const chartRef = this.chartRef.current.getContext("2d");
+    if (typeof this.chart !== "undefined") {
+      this.chart.destroy();
+    }
+    this.chart = new Chart(this.chartRef.current.getContext("2d"), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: label,
+            data,
+            fill: false,
+            tension: 0,
+          }
+        ] 
+      },
+      options: {
+        responsive: true,
+      }
+    })
+  }
   render() {
     const { baseCurrency,baseValue,secondCurrency,rate} = this.state;
     return (
@@ -122,6 +169,7 @@ class CurrencyConverter extends React.Component  {
               <div><h4><input value={rate} onChange={this.changeSecondValue} class="form-control form-control-lg text-center"/></h4></div>
              
               </form>
+              <canvas ref={this.chartRef}/>
               </div>
           </div>
         </div>
