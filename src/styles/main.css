@@ -10,7 +10,8 @@ a{
 }
 .form-control {
     border-color: #4332AC !important;
-    background-color: #5DDF99 !important;;
+    background-color: #5DDF99 !important;
+    color:#4332AC !important;
 }
 
 .currency-table{
@@ -22,4 +23,8 @@ td{
 }
 tr{
     color: #4332AC;
+}
+.second-currency{
+    font-size: 1.25rem;
+    color:#4332AC;
 }

@@ -166,8 +166,7 @@ class CurrencyConverter extends React.Component  {
                 <select value={secondCurrency} onChange={this.changeSecondCurrency} className="form-control form-control-lg text-center " >
                 {Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>)}
               </select>
-              <div><h4><input value={rate} onChange={this.changeSecondValue} class="form-control form-control-lg text-center"/></h4></div>
-             
+              <div class="second-currency">{rate}</div>
               </form>
               <canvas ref={this.chartRef}/>
               </div>
